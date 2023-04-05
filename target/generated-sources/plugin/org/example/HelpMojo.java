@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * Display help information on teste-plugin.<br>
- * Call <code>mvn teste-plugin:help -Ddetail=true -Dgoal=&lt;goal-name&gt;</code> to display parameter details.
+ * Call <code>mvn test:help -Ddetail=true -Dgoal=&lt;goal-name&gt;</code> to display parameter details.
  * @author maven-plugin-tools
  */
 @Mojo( name = "help", requiresProject = false, threadSafe = true )

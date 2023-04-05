@@ -1,10 +1,6 @@
 package org.example;
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -13,27 +9,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-@Mojo(name="getVersion", defaultPhase = LifecyclePhase.INITIALIZE)
-public class getRequest extends AbstractMojo {
-    private String URL_TOKEN = "http://localhost:8080/realms/master/protocol/openid-connect/token";
-    private String URL_VERSION = "http://localhost:8080/admin/serverinfo";
+
+public class getRequest {
+    private static final String URL_TOKEN = "http://localhost:8080/realms/master/protocol/openid-connect/token";
+    private static final String URL_VERSION = "http://localhost:8080/admin/serverinfo";
 
 
-    /**
-     * @throws MojoExecutionException
-     * @throws MojoFailureException
-     */
-    @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-
-        try {
-            String token = getToken();
-            getVersion(token);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
+    public void getRequest() throws IOException {
     }
 
     private String getToken() throws IOException {
@@ -57,7 +39,8 @@ public class getRequest extends AbstractMojo {
         return token;
     }
 
-    private String getVersion(String token) throws IOException {
+    public String getVersion() throws IOException {
+        String token = getToken();
         URL url = new URL(URL_VERSION);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -67,12 +50,11 @@ public class getRequest extends AbstractMojo {
         //System.out.println(response);
         JSONObject json = new JSONObject(response);
         String version = json.getJSONObject("systemInfo").getString("version");
-        System.out.println("Versão: "+version);
 
         return version;
     }
 
-    private String getResponse(HttpURLConnection conn){
+    private String getResponse(HttpURLConnection conn) {
         BufferedReader in;
         String output;
 
@@ -101,3 +83,4 @@ public class getRequest extends AbstractMojo {
         return response.toString();
     }
 }
+
