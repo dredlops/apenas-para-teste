@@ -26,8 +26,7 @@ public class produceReport {
         try {
             writer = new FileWriter("output.txt");
             for ( int i = 0;i < counter;i++)
-                writer.write(array[i]);
-
+                writer.write(array[i]+"\n");
 
             //writer.write(array.toString());
             writer.close();
