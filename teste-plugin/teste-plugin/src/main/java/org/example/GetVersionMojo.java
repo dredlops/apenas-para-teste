@@ -1,6 +1,6 @@
 package org.example;
 
-import netscape.javascript.JSObject;
+import org.json.JSONObject;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;

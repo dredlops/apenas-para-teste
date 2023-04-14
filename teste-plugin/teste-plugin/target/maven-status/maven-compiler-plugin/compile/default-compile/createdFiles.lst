@@ -4,3 +4,4 @@ org\example\warning.class
 org\example\MyMojo.class
 org\example\getRequest.class
 org\example\GetVersionMojo.class
+org\example\getCVE.class

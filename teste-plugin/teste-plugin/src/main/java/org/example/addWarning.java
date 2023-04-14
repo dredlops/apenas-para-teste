@@ -21,7 +21,7 @@ public class addWarning extends AbstractMojo {
         getRequest g = new getRequest();
         try {version = g.getVersion();}
         catch (IOException e) { };
-        System.out.println("Versão: "+version);
+        //System.out.println("Versão: "+version);
         if (version.equals("21.0.1") || true){
             //System.out.println("Versão pode ter erros");
             warning w = new warning();
@@ -30,7 +30,12 @@ public class addWarning extends AbstractMojo {
             report.add(w.addWarning("severity2", "description2", "solution2",  "category2"));
             report.add(w.addWarning("severity3", "description3", "solution3",  "category3"));
 
-
+            getCVE cve = new getCVE();
+            try {
+                System.out.println(cve.get());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             //System.out.println(o);
 
         }
