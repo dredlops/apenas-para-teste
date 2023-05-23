@@ -16,7 +16,7 @@ import java.io.*;
 import java.util.Iterator;
 
 import org.json.JSONObject;
-
+import org.json.JSONArray;
 
 @Mojo(name="test", defaultPhase = LifecyclePhase.COMPILE)
 public class addWarning extends AbstractMojo {
@@ -30,14 +30,15 @@ public class addWarning extends AbstractMojo {
             throw new RuntimeException(e);
         }
         JSONTokener tokener = new JSONTokener(reader);
-        JSONObject root = new JSONObject(tokener);
-       Iterator it = root.keys();
-       Object obj;
+        JSONArray root = new JSONArray(tokener);
+       Iterator it = root.iterator();
+       JSONObject obj;
         produceReport report = new produceReport();
         warning w = new warning();
        while(it.hasNext()){
-           obj=it.next();
-           System.out.println(obj);
+           obj= (JSONObject) it.next();
+           report.add(w.addWarning(obj.get("severity").toString(), obj.get("message").toString(), obj.get("solution").toString(),  obj.get("date").toString()));
+
        }
 
 
