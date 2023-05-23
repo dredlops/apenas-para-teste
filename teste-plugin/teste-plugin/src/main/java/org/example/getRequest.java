@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class getRequest {
     private static final String URL_TOKEN = "http://localhost:8080/realms/master/protocol/openid-connect/token";
@@ -27,7 +28,7 @@ public class getRequest {
         String jsonInputString = "username=testuser&password=test&grant_type=password&client_id=admin-rest-client";
 
         OutputStream os = conn.getOutputStream();
-        byte[] input = jsonInputString.getBytes("utf-8");
+        byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
         os.write(input, 0, input.length);
         os.flush();
         os.close();
@@ -35,7 +36,7 @@ public class getRequest {
         String response = getResponse(conn);
         JSONObject obj = new JSONObject(response);
         String token = obj.getString("access_token");
-        //System.out.println("Token: " + token);
+        System.out.println("Token: " + token);
         return token;
     }
 

@@ -10,7 +10,7 @@ import java.io.FileWriter;
 public class produceReport {
 
     //JSONArray array = Json.createArrayBuilder();
-    private static String[] array = new String[20];
+    private static final String[] array = new String[20];
     private static FileWriter writer;
     private static int counter;
 

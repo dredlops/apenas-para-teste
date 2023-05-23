@@ -8,41 +8,70 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class getCVE {
-    private static final String URL_CVE = "https://api.cvesearch.com/search?q=Keycloak";
+    private static final String URL_CVE = "https://api.cvesearch.com/search?q=keycloak";
+    private Iterator cves;
+    private Response resp;
 
-    public void getCVE(){}
+    public getCVE() {
+        resp=new Response();
+    }
+
     public String get() throws IOException {
         URL url = new URL(URL_CVE);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-
-        String response = getResponse(conn);
-        //System.out.println(response);
-        //JSONObject temp = new JSONObject(response);
+        //conn.setConnectTimeout(120000);
+        String response =resp.getResponse(conn);
         JSONObject json = new JSONObject(response);
-        JSONArray temp = new JSONArray();
-        //String cve =
-        JSONObject cves = json.getJSONObject("response");
-        Iterator it = cves.keys();
-        //cria um vetor com as keys dos cves
-        while(it.hasNext()){
-            temp.put(it.next());
-        }
-
-        return temp.getString(0);
+        JSONObject cvesJson = json.getJSONObject("response");
+        cves = cvesJson.keys();
+        String[] temp = getAffectedVersions(cvesJson);
+        Iterator it= Arrays.stream(temp).iterator();
+        while (it.hasNext())
+            System.out.println(it.next());
+        return temp.toString();
     }
 
-    private String getResponse(HttpURLConnection conn) {
+    private String[] getAffectedVersions(JSONObject response) {
+        String cve;
+        Iterator temp;
+        String product = "";
+        String [] versions = new String[100];
+        int counter=0;
+
+        while (cves.hasNext()) {
+            cve = cves.next().toString();
+            temp = response.getJSONObject(cve).getJSONArray("affected_products").iterator();
+            while (temp.hasNext()) {
+                product = temp.next().toString();
+                String[] a = product.split(":");
+                String producer = a[a.length - 3];
+                String prod = a[a.length - 2];
+                String vers = a[a.length - 1];
+
+                //System.out.println(product);
+                if (producer.equals("redhat") || producer.equals("keycloak")) {
+                    if(prod.equals("keycloak"))
+                        versions[counter++]=product;
+                }
+            }
+        }
+        return versions;
+    }
+
+    /*private String getResponse(HttpURLConnection conn) {
         BufferedReader in;
         String output;
+        int counter =0;
 
         try {
             in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+                return "";
         }
 
         StringBuffer response = new StringBuffer();
@@ -62,5 +91,6 @@ public class getCVE {
             throw new RuntimeException(e);
         }
         return response.toString();
-    }
+    }*/
+
 }

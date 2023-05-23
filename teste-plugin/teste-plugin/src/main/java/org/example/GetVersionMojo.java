@@ -45,13 +45,13 @@ public class GetVersionMojo extends AbstractMojo {
     }
 
     public String getVersion() throws MojoExecutionException, IOException {
-        StringBuilder builder = new StringBuilder();
+        String builder = "";
 
         URL url = new URL("http://localhost:8080/admin/serverinfo/");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
+        //System.out.println("GET Response Code :: " + responseCode);
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             //System.out.println(con.getOutputStream());
 
@@ -65,7 +65,7 @@ public class GetVersionMojo extends AbstractMojo {
             in.close();
 
             // print result
-            System.out.println(response.toString());
+            System.out.println(response);
         } else {
             System.out.println("GET request did not work.");
         }
@@ -79,6 +79,6 @@ public class GetVersionMojo extends AbstractMojo {
         if(exitCode!=0){
             throw new MojoExecutionException("Execution of command'" +command+ "'failed with exit code: " + exitCode);
         }
-        return builder.toString();
+        return builder;
     }
 }
