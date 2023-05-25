@@ -1,5 +1,5 @@
-
 package org.example;
+
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

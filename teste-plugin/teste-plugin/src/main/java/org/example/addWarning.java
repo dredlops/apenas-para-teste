@@ -1,5 +1,7 @@
 package org.example;
 
+import edu.hm.hafner.analysis.IssueBuilder;
+import net.minidev.json.parser.ParseException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -24,6 +26,10 @@ public class addWarning extends AbstractMojo {
     private static FileReader reader;
 
     public void execute() {
+
+        KeycloakParser parser = new KeycloakParser();
+
+        /*
         try {
             reader = new FileReader("vulnerabilities.json");
         } catch (FileNotFoundException e) {
@@ -37,11 +43,14 @@ public class addWarning extends AbstractMojo {
         warning w = new warning();
        while(it.hasNext()){
            obj= (JSONObject) it.next();
-           report.add(w.addWarning(obj.get("severity").toString(), obj.get("message").toString(), obj.get("solution").toString(),  obj.get("date").toString()));
+           IssueBuilder issueBuilder = new IssueBuilder();
+           issueBuilder.setMessage(obj.get("message").toString());
+           issueBuilder.setDescription(obj.get("solution").toString());
+           //report.add(w.addWarning(obj.get("severity").toString(), obj.get("message").toString(), obj.get("solution").toString(),  obj.get("date").toString()));
 
        }
 
-
+*/
 
         //getRequest g = new getRequest();
         /*vulnerabilityTwo o = new vulnerabilityTwo();

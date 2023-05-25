@@ -55,7 +55,24 @@
       <artifactId>json</artifactId>
       <version>20230227</version>
     </dependency>
+    <dependency>
+      <groupId>edu.hm.hafner</groupId>
+      <artifactId>analysis-model</artifactId>
+      <version>10.10.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jenkins.plugins</groupId>
+      <artifactId>warnings-ng</artifactId>
+      <version>9.20.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.main</groupId>
+      <artifactId>jenkins-core</artifactId>
+      <version>2.76</version>
+    </dependency>
   </dependencies>
+
+
 
   <build>
     <plugins>
