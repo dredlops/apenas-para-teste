@@ -1,5 +1,0 @@
-[{"cve":"CVE-2022-1245","severity":"NORMAL", "description":"This is some description 1", "message":"This is some message 1", "additional": "stuff"},
-  {"cve":"CVE-2021-3827","severity":"NORMAL",  "description":"This is some description 2", "message":"This is some message 2", "additional": "stuff"},
-  {"cve":"CVE-2021-20323","severity":"HIGH",  "description":"This is some description 3", "message":"This is some message 3", "additional": "stuff"},
-  {"cve":"CVE-2022-1274","severity":"HIGH", "description":"This is some description 4", "message":"This is some message 4", "additional": "stuff"},
-  {"cve":"CVE-2021-3632","severity":"NORMAL", "description":"This is some description 5", "message":"This is some message 5", "additional": "stuff"}]
