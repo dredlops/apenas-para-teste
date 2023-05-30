@@ -20,14 +20,15 @@ import java.util.Iterator;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-@Mojo(name="test", defaultPhase = LifecyclePhase.COMPILE)
+@Mojo(name="teste", defaultPhase = LifecyclePhase.INITIALIZE)
 public class addWarning extends AbstractMojo {
     private String version="";
     private static FileReader reader;
 
     public void execute() {
+        System.out.println("Comecei");
 
-        KeycloakParser parser = new KeycloakParser();
+        //KeycloakParser parser = new KeycloakParser();
 
         /*
         try {
